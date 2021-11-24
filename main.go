@@ -1,13 +1,14 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/gorilla/websocket"
 	"log"
 	"math/rand"
 	"net/http"
 	"strconv"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/gorilla/websocket"
 )
 
 const (
@@ -51,7 +52,7 @@ func serveWs() gin.HandlerFunc {
 		data := make(chan string)
 		go ping(data)
 
-		for {
+		for i := 0; i < 3000; i++ {
 			err = ws.WriteMessage(1, []byte(<-data))
 			if err != nil {
 				log.Println("write:", err)
